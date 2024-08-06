@@ -9,7 +9,7 @@ public class Task2 {
 	public static void main(String[] args) {
 		int mul=1;
 		
-		String path = "task.txt";
+		String path = "task2.txt";
 		File f = new File(path);
 		
 		try {
