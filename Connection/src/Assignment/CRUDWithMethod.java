@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class CRUDWithMethod {
 	
@@ -30,6 +31,31 @@ public class CRUDWithMethod {
 		String query = "DELETE FROM city WHERE pin=800001 ";
 		stmt.execute(query);
 	}
+	
+	public static void displayData(Statement stmt) throws SQLException {
+		
+		String query = "SELECT * FROM city";
+		ResultSet result = stmt.executeQuery(query);
+		int i=1;
+		while(result.next()){
+            
+            String cityname = result.getString("cityname");
+            String state = result.getString("state");
+            int pin = result.getInt("pin");
+           
+            System.out.println("Record "+ i + ": ");
+            System.out.print("City: ");
+            System.out.print(cityname + "\t");
+            
+            System.out.print("State: ");
+            System.out.print(state + "\t");
+            
+            System.out.print("Pin: ");
+            System.out.println(pin + "\t");
+            
+            i++;
+        }
+	}
 
 	public static void main(String[] args) {
 		
@@ -52,7 +78,10 @@ public class CRUDWithMethod {
 //			updateRecord(stmt);
 			
 			//method for deletion
-			deleteRecord(stmt);
+//			deleteRecord(stmt);
+			
+			//method to display the records
+			displayData(stmt);
 			
 			
 			conn.close();
@@ -65,7 +94,7 @@ public class CRUDWithMethod {
 			e.printStackTrace();
 		}
 		finally {
-			System.out.println("Successful");
+			System.out.println("\nCode successfully executed");
 		}
 
 	}
